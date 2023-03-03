@@ -1,0 +1,636 @@
+/* 
+sizes:
+   - mobile: max width 550 px
+   - tablet: 550px - 810px
+   - pc: min width 810px
+*/
+
+
+nav,.productDescription{
+    display:none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo,.close,#promoBtn,.productDetailsBtn,.productAdd,#submitBtn,.icon,footer img {
+    cursor: pointer;
+}
+.close{
+    text-decoration: underline;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    font-size: medium;
+    background-color: #f3f3f3;
+}
+
+input,select,textarea{
+    box-shadow: 1px 1px 1px rgba(80, 78, 78, 0.18) inset;
+}
+
+.logo{
+    margin-left:2%;
+    width:40%;
+}
+
+#bannerDiv{
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+#slogans{
+    position: absolute;
+    top: 36%;
+    right:5%;
+    color:#f3f3f3;
+    text-shadow: -3px 1px 4px #0000008c;
+}
+
+#slogan1,#slogan2 {
+    font-family: 'Seymour One', sans-serif;
+}
+
+#slogan1{
+     font-size: small;
+     margin:auto
+}
+
+#slogan2{
+    font-size: x-large;
+    margin:auto
+}
+
+#promoBtn{
+    margin-top: 7px;
+    margin-left: 20px;
+    padding:2% 7%;
+    border-radius: 10px;
+    border-width: thin;
+    font-family:'Oswald', sans-serif;
+}
+  
+#promoBtn:hover {
+    background-color: #b86029; 
+    color: white;
+
+}
+
+#categoryIcons{
+   position:relative;
+   right: 5%;
+   margin-bottom: 5%;
+}
+
+li {
+    list-style: none;
+}
+
+.icon {  /*mobile & tablet only*/
+    float:left;
+    width:14%;
+    padding: 0 5%;
+    -webkit-filter: drop-shadow(5px 5px 5px #b8602969 );
+    filter: drop-shadow(3px 3px 4px #b8602967);
+}
+
+.clear{
+    clear:both;
+}
+
+#filtering{
+    font-size: x-small;
+    text-align: center;
+    line-height: 3;
+}
+
+#spCurrentDateTime{
+    display:block;
+    color: gray;
+    font-size: small;
+    text-align: center;
+}
+
+#ddProductsFilter, #ddCurrencyFilter{
+    width: 25%;
+    margin: 0 5% 2% 2%;
+    padding: 0 5%;
+    border: none;
+    border-radius: 10px;
+    background-color: #dee1e6;
+    font-size: small;
+    font-family:'Oswald', sans-serif;
+  }
+
+.divProductCard{
+    margin:5% auto;
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: white;
+    line-height: 1.8;
+    font-size: small;
+}
+
+.productName{
+    margin-left: 5%;
+    font-size: 180%;
+    font-weight: bolder;
+}
+
+.productRating{
+    float:right;
+    margin-right: 5%;
+    color:#b66133;
+    font-size: 180%;
+    font-weight: bolder;
+}
+
+.productPrice{
+    margin-left: 5%;
+    font-size: large;
+}
+
+.productDetails{
+    margin:5%;
+    color:rgb(77, 77, 77);
+}
+
+.productDetailsBtn{
+    display: block;
+    margin: 2% 3.5%;
+    border:none;
+    box-shadow: none;
+    background-color: white;
+    color:#b66133;
+    font-family: 'Oswald', sans-serif;
+    font-size:small;
+}
+
+.qtyInp{
+    width: 20%;
+    height:40%;
+    margin: 0 5% 5% 5%;
+    padding: 1% 5%;
+    border: none;
+    border-radius: 10px;
+    background-color: #dee1e6;
+    font-size: small;
+    font-family:'Oswald', sans-serif;
+    text-align: center;
+}
+
+.productAdd{
+    float:right;
+    margin-right: 5%;
+    padding: 1% 5%;
+    width: 55%;
+    height:40%;
+    border:none;
+    border-radius: 10px;
+    background-color: #c25c23;
+    color:white;
+    font-size: small;
+    font-family:'Oswald', sans-serif;
+    text-align: center;
+}
+
+.sectionHeader{
+    margin:10% 5% 5% 5%;
+}
+
+.sectionHeader img{
+    height: 40px;
+    vertical-align: sub;
+}
+
+.sectionHeader span{
+    font-family: 'Seymour One', sans-serif;
+    font-size: large;
+    margin-left:3%;
+}
+
+table {
+    width:90%;
+    margin:0 5%;
+    text-align: center;
+}
+
+td>input{
+    width:30px;
+    border:none;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+}
+
+.nameCol{
+    width:35%;
+}
+
+.qtyCol{
+    width:20%;
+}
+
+th,td{
+    padding: 5px;
+    font-size: small;
+    text-align: center;
+}
+
+#divCartOutput{
+    float:right;
+    margin-right: 5%;
+    width:50%;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.totalRow{
+    font-weight: bold;
+    color:#c25c23;
+}
+
+#reviewChoose{
+    font-size: small;
+    margin: 0 0 3% 3%;
+}
+
+.reviewDiv>span{
+    margin-left: 3%;
+    float:left;
+}
+
+.reviewDiv>input,.reviewDiv>select{
+    float:left;
+    margin-left: 1%;
+    border:none;
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(104, 104, 104);
+    text-align: center;
+    font-family:'Oswald', sans-serif;
+    font-size: small;
+}
+
+#reviewIpt{
+    margin-left:6%;
+    font-size: small;
+}
+
+#reviewIpt>textarea{
+    margin-bottom: 3%;
+    width:80%;
+    border:none;
+    border-radius: 10px;
+    background-color: white;
+    text-indent: 3%;
+    color: rgb(104, 104, 104);
+    font-size: small;
+    font-family:'Oswald', sans-serif;
+}
+
+#submitBtn{
+    display: block;
+    margin:0 auto;
+    padding: 1% 0;
+    width: 40%;
+    border:none;
+    border-radius: 10px;
+    background-color: #c25c23;
+    color:white;
+    font-family:'Oswald', sans-serif;
+    text-align: center;
+}
+
+footer{
+    margin-top: 10%;
+    text-align: center;
+    color:#585858;
+    font-size: x-small;
+}
+
+hr{
+    border:none;
+    height: 1px;
+    background-color: rgba(70, 70, 70, 0.5);
+    box-shadow: 0px 5px 10px rgb(0 0 0 / 65%);
+    margin-bottom: 5%;
+}
+
+footer img{
+    width: 30%;
+    margin:0 auto;
+}
+
+footer nav{
+    display: block;
+    width: 300px;
+    margin:0 auto 15% auto;
+}
+
+footer li{
+    float:left;
+    padding: 2%;
+    text-align: center;
+}
+
+
+a{
+    text-decoration: none;
+    color:#585858;
+}
+
+@media screen and (min-width:550px){
+
+    /*  
+    2-column layout + some hover effect + some font size adjustment 
+    */
+
+    #slogans{
+        top: 36%;
+        right:5%;
+    }
+    
+    #slogan1{
+         font-size: medium;
+    }
+    
+    #slogan2{
+        font-size: xx-large;
+    }
+
+    #promoBtn{
+        width:80%;
+        font-size: large;
+    }
+ 
+    #filtering,#spCurrentDateTime{
+        font-size: medium;
+    }
+
+    #ddProductsFilter, #ddCurrencyFilter{
+        padding: 0 5%;
+        font-size: medium;
+    }
+
+    #divProductsOutput{
+        margin-left: 2%;
+    }
+
+    .divProductCard {
+        width:45%;
+        float:left;
+        margin:3% 3% 0% 0; 
+        box-shadow: 2px 2px 5px rgba(80, 78, 78, 0.18);
+
+    }
+
+    .productName{
+        font-size: 130%;
+    }
+
+    .productDetails{
+        position: absolute;
+        margin-top: -20%;
+        background-color: #ffffffec;
+        border-radius: 10px;
+        box-shadow: 5px 5px 10px rgba(80, 78, 78, 0.18);
+        padding: 2%;
+        color: rgb(0, 0, 0);
+        z-index: 3;
+    }
+
+    .productDetailsBtn,.qtyInp,.productAdd,.productDetails{
+        font-size: medium;
+    }
+
+    .sectionHeader{
+        margin:5%;
+    }
+
+    .sectionHeader img{
+        width: 80px;
+        height: 80px;
+    }
+
+    .sectionHeader span{
+        position: relative;
+        bottom:10px;
+        font-size: x-large;
+    }
+
+    table {
+        width:70%;
+        margin:0 auto;
+    }
+
+    th{
+        color:#c25c23;
+    }
+
+    th,td,td>input{
+        font-size: medium;
+    }
+
+    td>input{
+        width:50px;
+    }
+
+    #divCartOutput{
+        margin:5% auto;
+        float: none;
+        position: relative;
+        left:18%;
+        width:40%;
+        border-top:1px solid #c25d234b;
+    }
+
+    #reviewChoose,#reviewIpt{
+        width:70%;
+        margin:0 auto;
+        position: relative;
+        left: 10%;
+    }
+
+    .reviewDiv>span{
+        margin: 0%;
+        padding: 5px;
+        margin-right:2%
+    }
+
+    .reviewDiv>select{
+        width:30%;
+        padding: 5px;
+        margin-right:2%
+    }
+
+    .reviewDiv>input{
+        width:10%;
+        padding: 5px;
+    }
+
+    #reviewIpt{
+        margin-top:2%;
+        padding-left: 10px;
+    }
+
+    #reviewIpt>textarea{
+        margin-top:2%;
+        width:70%;
+    }
+
+    #reviewChoose,.reviewDiv>input,.reviewDiv>select,#reviewIpt,#reviewIpt>textarea,#submitBtn,footer{
+        font-size: medium;
+    }
+
+    #submitBtn{
+        width: 50%;
+    }
+    footer img{
+        display: inline;
+        float:left;
+        width: 30%;
+        margin-left: 5%;
+    }
+    footer nav{
+        display:inline;
+        width: 70%;
+        margin-right: 5%;
+    }
+    footer li{
+        float:right;
+    }
+}
+
+@media screen and (min-width:810px){
+
+    /*  
+    3-column layout + nav bar + some hover effect + some font size adjustment 
+    */
+
+    body {
+        max-width:1200px;
+        margin:0 auto;
+        font-size: large;
+    
+    }
+
+    .logo{
+        float:left;
+        margin-top:1%;
+        width:20%;
+    }
+
+    nav {                   /* pc only */
+        display:inline;
+        float:right;
+        width:70%;
+    }
+
+    nav a{
+        color:#404040;
+    }
+
+    nav a:hover,.close:hover{
+        color:#c25c23;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    #topBar li {
+        float:right;
+        margin-top:-2%;
+        padding: 3% 5%;
+    }
+
+    #slogans{
+        top: 36%;
+        right:5%;
+    }
+
+    #slogan1{
+         font-size: 200%;
+    }
+
+    #slogan2{
+        font-size: 400%;
+    }
+
+    #promoBtn{
+        font-size: 150%;
+        padding:2% 7%;
+        border:none;
+        border-radius: 40px;
+        background-color: rgba(255, 255, 255, 0.514);
+        color:#662701;
+    }
+
+    .icon {
+        display:none;
+    }
+
+    #filtering{
+        display:inline;
+        float:left;
+        width:60%;
+        margin:-3% 0 0 -3%;
+        font-size: large;
+    }
+
+    #spCurrentDateTime{
+        display:inline;
+        float:right;
+        margin-top:-2%;
+        width:40%;
+        font-size: large;
+        color: gray;
+    }
+
+    #ddProductsFilter, #ddCurrencyFilter{
+        font-size: large;
+    }
+  
+    .divProductCard {
+        width:30%;
+    }
+
+    .productName{
+        font-size: 180%;
+    }
+
+    .productPrice{
+        font-size: x-large;
+    }
+    
+    .sectionHeader span{
+        font-size: xx-large;
+    }
+ 
+    th,td,td>input{
+        font-size: large;
+    }
+
+    #reviewChoose,.reviewDiv>input,.reviewDiv>select,#reviewIpt,#reviewIpt>textarea,#submitBtn,footer{
+        font-size: large;
+    }
+
+    
+    footer nav{
+        width: 65%;
+        margin-bottom: 5%;
+   }
+    footer li{
+        padding:0 5%
+    }
+
+    footer img{
+        width: 20%;
+        margin: 4px 0 0 5%;
+    }
+ 
+}

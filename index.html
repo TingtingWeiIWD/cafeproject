@@ -1,0 +1,802 @@
+<!--
+	
+Student Name: Tingting Wei
+Project: IWD F2021 Final Project for INFO-1272 & INFO-1252
+Purpose: Online Cafe Store
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="IWD cafe -- an online store for coffee and bakery.">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Passion+One:wght@400;700;900&family=Seymour+One&display=swap"
+		rel="stylesheet">
+	<title>IWD Cafe</title>
+</head>
+
+<body>
+	<header>
+		<div id="topBar">
+			<span><img src="images/logo_gray.png" alt="logo" class="logo" onclick="location.reload()"></span>
+			<nav>
+				<!-- nav displays on pc screens only -->
+				<ul>
+					<li><a href="#">Join us</a></li>
+					<li><a href="#footer">About</a></li>
+					<li><a href="#">Services</a></li>
+					<li><a href="#filtering">Menu</a></li>
+				</ul>
+			</nav>
+			<div class="clear"></div>
+		</div>
+		<div id="bannerDiv">
+			<img src="images/banner1.jpeg" alt="banner" />
+			<div id="slogans">
+				<div id="slogan1">Don't HAVE a nice day,</div>
+				<div id="slogan2">GRAB One!</div>
+				<input id="promoBtn" type="button" value="View Our Holiday Special"
+					onclick="filterByIcon('Xmas Special')">
+			</div>
+		</div>
+	</header>
+
+	<div id="categoryIcons">
+		<!-- icons display on mobile & tablet screens only -->
+		<ul>
+			<li><img src="images/icons/holiday.png" alt="Holiday" class="icon" onclick="filterByIcon('Xmas Special')">
+			</li>
+			<li><img src="images/icons/coffee.png" alt="Coffee" class="icon" onclick="filterByIcon('Coffee')"></li>
+			<li><img src="images/icons/bakery.png" alt="Bakery" class="icon" onclick="filterByIcon('Bakery')"></li>
+			<li><img src="images/icons/set.png" alt="Combos" class="icon" onclick="filterByIcon('Combos')"></li>
+		</ul>
+		<div class="clear"></div>
+	</div>
+
+	<main>
+		<!--Products list-->
+		<section id="products">
+			<div id="filtering">
+				<span>
+					Category
+					<select id="ddProductsFilter" onchange="filterByCategory()">
+						<option>All</option>
+						<option>Xmas Special</option>
+						<option>Coffee</option>
+						<option>Bakery</option>
+						<option>Combos</option>
+					</select>
+				</span>
+				<span>
+					Currency
+					<select id="ddCurrencyFilter" onchange="filterByCategory()">
+						<option>CAD</option>
+						<option>USD</option>
+						<option>CNY</option>
+					</select>
+				</span>
+			</div>
+			<div id="spCurrentDateTime">curruntDateTime</div>
+
+			<div class="clear"></div>
+
+			<div id="divProductsOutput"></div>
+		</section>
+		<!--End products list-->
+
+		<!--Shopping Cart-->
+		<div class="clear"></div>
+		<section>
+			<div>
+				<div id="orderDetialsPic" class="sectionHeader">
+					<img src="images/OrderDetials.png" alt="Order Details" class="sectionHeaderPic">
+					<span>Order Details</span>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th class="nameCol">Name</th>
+							<th>Price</th>
+							<th class="qtyCol">Qty</th>
+							<th>Subtotal</th>
+						</tr>
+					</thead>
+					<tbody id="tbCartList">
+					</tbody>
+				</table>
+			</div>
+
+			<div id="divCartOutput" style="display: none;">
+				<table>
+					<tr>
+						<td>Item Subtotal</td>
+						<td id="tdItemSub"></td>
+					</tr>
+					<tr>
+						<td>Delivery Fee</td>
+						<td id="tdShipping"></td>
+					</tr>
+					<tr>
+						<td>Subtotal</td>
+						<td id="tdSub"></td>
+					</tr>
+					<tr>
+						<td>Estimated Tax</td>
+						<td id="tdTax"></td>
+					</tr>
+					<tr class="totalRow">
+						<td>Estimated Total</td>
+						<td id="tdTotal"></td>
+					</tr>
+				</table>
+			</div>
+		</section>
+		<div class="clear"></div>
+		<!--End Shopping Cart-->
+
+		<!--Customer Review-->
+		<section>
+			<div class="sectionHeader">
+				<img src="images/CustomerReviews.png" alt="Customer Reviews">
+				<span>Customer Reviews</span>
+			</div>
+
+			<div id="reviewChoose">
+				<div class="reviewDiv">
+					<span>Choose an Item</span>
+					<select id="ddReviewItem"></select>
+				</div>
+				<div class="reviewDiv">
+					<span>Rating</span>
+					<input type="number" value="5.0" step="0.1" min="1" max="5" id="numReviewRating"
+						onblur="validateRating()">
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="reviewIpt">
+				<div>Review</div>
+				<textarea id="reviewText" placeholder="Tell us how you feel..."></textarea>
+			</div>
+			<button id="submitBtn" type="submit" onclick="reviewProduct()">Submit Review</button>
+		</section>
+		<!--End Customer Review-->
+	</main>
+
+	<!--Footer(email link here)-->
+	<footer id="footer">
+		<hr>
+		<span><img src="images/logo_gray.png" alt="logo" onclick="location.reload()"></span>
+		<nav>
+			<ul>
+				<li><a href="#">Privacy & Terms</a></li>
+				<li><a href="#">Business Orders</a></li>
+				<li><a href="#">Recipes</a></li>
+				<li><a href="mailto:t_wei150930@fanshaweonline.ca">Contact</a></li>
+			</ul>
+		</nav>
+	</footer>
+
+	<!-- Javascript -->
+
+	<script>
+		// Constructor for Product object
+		function Product(image, id, name, price, description, category, isXmasSpecial, qtyOnHand, maxQty, shippingCost, reviews) {
+			this.image = image;                 // 0 string link to the image file
+			this.id = id;                       // 1 string
+			this.name = name;                   // 2 string
+			this.price = price;                 // 3 number
+			this.description = description;     // 4 string
+			this.category = category;           // 5 string
+			this.isXmasSpecial = isXmasSpecial; // 6 boolean
+			this.qtyOnHand = qtyOnHand;         // 7 number
+			this.maxQty = maxQty;               // 8 number
+			this.shippingCost = shippingCost;   // 9 number
+			this.reviews = reviews              // 10 array of objects
+			this.averageRating = function () {
+				var sumRating = 0;
+				for (var i = 0; i < this.reviews.length; i++) {
+					sumRating += this.reviews[i].rating;
+				}
+				return (sumRating / this.reviews.length).toFixed(1);
+			}
+			this.displayReviews = function () {
+				var reviewsOutput = "";
+				for (var num = 0; num < this.reviews.length; num++) {
+					reviewsOutput += "☆" + this.reviews[num].rating.toFixed(1) + ' -- "' + this.reviews[num].text + '"<br>'
+				}
+				return reviewsOutput;
+			};
+
+		};
+
+		//Global arrays for product list 
+		var productList = [];
+
+		//Create objects for products
+		//                           image,id,name,price,description,category,isXmasSpecial,qtyOnHand,maxQty,shippingCost,reviews
+		productList.push(new Product("images/Americano.jpg", "A01", "Americano", 3.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp Awaken the senses.", "Coffee", false, 100, 10, 1.00, [{ rating: 4.8, text: "can't go to work without it!" }, { rating: 4.9, text: "Refreshing coffee" }]));
+		productList.push(new Product("images/Latte.jpg", "A02", "Latte", 5.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp * Xmas Special <br>&nbsp&nbsp&nbsp&nbsp&nbsp When your brain needs a hug!", "Coffee", true, 100, 10, 1.00, [{ rating: 4.7, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Cappuccino.jpg", "A03", "Cappuccino", 5.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp Experience love at first sip.", "Coffee", false, 100, 10, 1.00, [{ rating: 4.9, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Hot Chocolate.jpg", "A04", "Hot Chocolate", 6.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp * Xmas Special <br>&nbsp&nbsp&nbsp&nbsp&nbsp Alaskan made. Santa Approved.", "Coffee", true, 100, 10, 1.00, [{ rating: 4.8, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Tea.jpg", "A05", "Black Tea", 2.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp * Xmas Special <br>&nbsp&nbsp&nbsp&nbsp&nbsp Make it a real good time.", "Coffee", true, 100, 10, 1.00, [{ rating: 4.7, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Soda.jpg", "A06", "Soda", 1.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp Fresh up.", "Coffee", false, 100, 10, 1.00, [{ rating: 4.6, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Croissant.jpg", "B01", "Croissants", 4.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp * Xmas Special <br>&nbsp&nbsp&nbsp&nbsp&nbsp 2-Pack <br>&nbsp&nbsp&nbsp&nbsp&nbsp They taste as good as they look!", "Bakery", true, 100, 10, 1.00, [{ rating: 4.8, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Cookies.jpg", "B02", "Chocolate Chip Cookies", 2.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp 6-Pack.<br>&nbsp&nbsp&nbsp&nbsp&nbsp Let us keep your cookie jar filled", "Bakery", false, 100, 10, 1.00, [{ rating: 4.9, text: "yumyum!" }]));
+		productList.push(new Product("images/Cheesecake.jpg", "B03", "Cheesecake", 6.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp We treat cheesecake obsession.", "Bakery", false, 100, 10, 1.00, [{ rating: 5.0, text: "creamy as heaven!" }]));
+		productList.push(new Product("images/Cupcakes.jpg", "B04", "Xmas Cupcakes", 8.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp * Xmas Special <br>&nbsp&nbsp&nbsp&nbsp&nbsp 4-Pack.<br>&nbsp&nbsp&nbsp&nbsp&nbsp Happiness starts here.", "Bakery", true, 100, 10, 1.00, [{ rating: 4.8, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Sandwich.jpg", "B05", "Sandwich", 10.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp We'll make your tummy smile.", "Bakery", false, 100, 10, 1.00, [{ rating: 4.8, text: "PLEASE everyone try it!!!!" }]));
+		productList.push(new Product("images/Muffin.jpg", "B06", "Muffins", 3.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp 4-Pack <br>&nbsp&nbsp&nbsp&nbsp&nbsp Freshness baked Everyday.", "Bakery", false, 100, 10, 1.00, [{ rating: 4.8, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Set1.jpg", "C01", "Due Day Combo", 9.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp 2 Croissants & 1 Americano, <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Perfect start for a day to work on dues.", "Combos", false, 100, 10, 1.00, [{ rating: 4.8, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Set2.jpg", "C02", "Meeting Combo", 24.99, "<br>&nbsp&nbsp&nbsp&nbsp 6 coffee of your choice & 1 box of cookies.<br>&nbsp&nbsp&nbsp&nbsp&nbspGet drinks prepared for a brainstorming meeting!", "Combos", false, 100, 10, 1.00, [{ rating: 4.8, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Set3.jpg", "C03", "Hanging Combo", 18.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp 2 coffee & 2 food of your choice. <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Enjoy a fun coffee chat! ", "Combos", false, 100, 10, 1.00, [{ rating: 4.8, text: "can't go to work without it!" }]));
+		productList.push(new Product("images/Set4.jpg", "C04", "Holiday Combo", 9.99, "<br>&nbsp&nbsp&nbsp&nbsp&nbsp * Xmas Special <br>&nbsp&nbsp&nbsp&nbsp&nbsp 1 Hot Chocolate & 1 box of Xmas cookies.<br>&nbsp&nbsp&nbsp&nbsp&nbsp Bring it to your niece/nephew's and you're the cool aunt/uncle!  ", "Combos", true, 100, 10, 1.00, [{ rating: 4.8, text: "can't go to work without it!" }]));
+
+		// Constructor for shoppingCart
+		function cartItem(id, name, price, qty, shippingCost) {
+			this.id = id;                                 // string
+			this.name = name;                             // string
+			this.price = price;                           // number
+			this.qty = qty;                               // number
+			this.shippingCost = shippingCost;             // number
+			this.getItemSubtotal = function () { return (this.price * this.qty) };        // a method to calculate item subtotal
+			this.getShippingSubtotal = function () { return (this.shippingCost * this.qty) } // a method to calculate shipping subtotal  
+		}
+		//Global arrays for shopping cart
+		var shoppingCart = [];
+
+		//variables for shopping cart calculation
+		var nameToAdd;
+		var qtyToAdd;
+		var updatedQty;
+
+		/*
+			addToCart()
+			Purpose: 1.based on the variables retreived form productCard(qtyToAdd & nameToAdd),
+					   push new object to shoppingCart array 
+					 2.update qtyOnHand from productList array
+			Trigger: when user click "add to cart" button on product cards
+			Parameters: none
+			Returns: none
+		*/
+		function addToCart() {
+			// Step 1. loop both array to find the matched item
+			var matchedProduct = {};
+			var matchedCartItem = {};
+			for (var i = 0; i < productList.length; i++) {
+				if (productList[i].name == nameToAdd) {
+					matchedProduct = productList[i];
+				}
+			};
+			for (var x = 0; x < shoppingCart.length; x++) {
+				if (shoppingCart[x].name == nameToAdd) {
+					matchedCartItem = shoppingCart[x];
+				}
+			};
+
+			// Step 2: 
+			//      - if shoppingCart array is empty or item hasn't been added into cart, pust a new object to shoppingCart array
+			//      - if item is in the cart, update quantity
+
+			if (shoppingCart.length == 0) {
+				shoppingCart.push(new cartItem(matchedProduct.id, nameToAdd, matchedProduct.price, qtyToAdd, matchedProduct.shippingCost));
+				window.alert("Item Added!\nContinue shopping or scroll down to check out. ");
+				matchedProduct.qtyOnHand -= qtyToAdd;
+			} else if (matchedProduct.name == matchedCartItem.name) {
+				if (matchedCartItem.qty + qtyToAdd > 10) {
+					window.alert("Maximun 10 per customer!");
+					matchedCartItem.qty = 10;
+					matchedProduct.qtyOnHand = 100 - matchedCartItem.qty;
+				} else {
+					matchedCartItem.qty += qtyToAdd;
+					window.alert("Item Added!\nContinue shopping or scroll down to check out. ");
+					matchedProduct.qtyOnHand -= qtyToAdd;
+				};
+			} else {
+				shoppingCart.push(new cartItem(matchedProduct.id, nameToAdd, matchedProduct.price, qtyToAdd, matchedProduct.shippingCost));
+				window.alert("Item Added!\nContinue shopping or scroll down to check out. ");
+				matchedProduct.qtyOnHand -= qtyToAdd;
+			};
+
+			//  call function to display shoppingCart and product cards
+			displayShoppingCart();
+			filterByCategory();
+		};
+
+
+		/*
+			updateCart()
+			Purpose: update item's quantity on cart and quantity on hand, 
+					 if quantity on cart == 0, the object will be removed from shoppingCart array
+			Trigger: when user edit shopping cart quantity (number input)
+			Parameters: none
+			Returns: none
+		*/
+		function updateCart() {
+			// Step 1. loop both array to find the matched item
+			var matchedProduct = {};
+			var matchedCartItem = {};
+			for (var i = 0; i < productList.length; i++) {
+				if (productList[i].name == nameToAdd) {
+					matchedProduct = productList[i];
+				}
+			};
+			for (var x = 0; x < shoppingCart.length; x++) {
+				if (shoppingCart[x].name == nameToAdd) {
+					matchedCartItem = shoppingCart[x];
+					if (updatedQty == 0) {
+						shoppingCart.splice(x, 1);
+					}
+				}
+			};
+			// Step 2. re-assign quantity on cart and quantity on hand
+			matchedCartItem.qty = parseInt(updatedQty);
+			matchedProduct.qtyOnHand = 100 - matchedCartItem.qty;
+
+			displayShoppingCart();
+			filterByCategory();
+		}
+
+
+		// display all products on load
+		displayProducts(productList);
+
+		//display current datetime on load
+		displayCurrentDatetime();
+
+		//populate select options in Customer Reviews section 
+		populateProductBox()
+
+		// display shoppingcart on load
+		displayShoppingCart()
+
+		// displayCurrentDatetime()
+		function displayCurrentDatetime() {
+			const d = new Date();
+			document.getElementById("spCurrentDateTime").innerHTML = d;
+		}
+
+		/*
+			convertPrice(price)
+			Purpose: to convert the currency by users's choice
+			Trigger: when prices in product cards and shopping cart are displayed 
+			Parameters: canadian price
+			Returns: converted price
+		*/
+		function convertPrice(price) {
+			var currencySelected = document.getElementById("ddCurrencyFilter");
+			const convRateUSD = 0.78;
+			const convRateCNY = 5.01;
+			if (currencySelected.value == "CAD") {
+				return "$" + price.toFixed(2);
+			} else if (currencySelected.value == "USD") {
+				return "$" + (price * convRateUSD).toFixed(2) + "(USD)";
+			} else if (currencySelected.value == "CNY") {
+				return "￥" + (price * convRateCNY).toFixed(2) + "(CNY)";
+			}
+			// call filterByCategory() to display the converted prices
+			filterByCategory();
+		};
+
+		/*
+			convertPrice(price)
+			Purpose: to creat a new array based on category selected by user. 
+					 the new array will then be passed into displayProducts(productFiltered)
+			Trigger: 1. when user selected a category 
+					 2. when a user review submitted(update review in item details) 
+					 3. when an item added to cart or shopping cart qty changed(update qtyOnHand) 
+			Parameters: canadian price
+			Returns: converted price
+		*/
+		function filterByCategory() {
+			var productFiltered = [];
+			var selectedCategory = document.getElementById("ddProductsFilter").value;
+			for (var i = 0; i < productList.length; i++) {
+				if (selectedCategory == productList[i].category) {
+					productFiltered.push(productList[i]);
+				} else if (selectedCategory == "Xmas Special" && productList[i].isXmasSpecial == true) { //Xmas Special item can be from any category
+					productFiltered.push(productList[i]);
+				} else if (selectedCategory == "All") {
+					productFiltered = productList;
+				}
+			} //end for
+
+			displayProducts(productFiltered);
+			displayShoppingCart();
+
+		} //end filterByCategory()
+
+
+		/*
+			filterByIcon(category)--mobile and tablet only
+			Purpose: change the selected option from category selection
+			Trigger: when user clicks "see our holiday special" button or the icons on mobile size screen
+			Parameters: the category each icon stands for 
+			Returns: none
+		*/
+
+		function filterByIcon(icon) {
+			var optCategory = document.getElementById("ddProductsFilter").getElementsByTagName("option");
+			for (var i = 0; i < optCategory.length; i++) {
+				if (optCategory[i].value == icon) {
+					optCategory[i].selected = true;
+				}
+			}
+			filterByCategory();
+			displayShoppingCart();
+			window.location.href = "#filtering";
+		}
+
+
+		/*
+			displayProducts()
+			Purpose: display items form chosen array
+			Trigger: 1. on page loads 2. when filterByCategory() called
+			Parameters: array of products populated from filterByCategory() 
+			Returns: none
+		*/
+		function displayProducts(products) {
+			//get the products output div
+			var productsOutput = document.getElementById("divProductsOutput");
+			productsOutput.innerHTML = "";
+
+			// loop the array to ouput
+			for (var i = 0; i < products.length; i++) {
+				// create a card for each product
+				var productCard = document.createElement("div");
+				productCard.className = "divProductCard";
+
+				// Create div for each property in product object
+
+				// image
+				var tempImg = document.createElement("img");
+				tempImg.src = products[i].image;
+				productCard.appendChild(tempImg);
+
+				// name 
+				var tempName = document.createElement("span");
+				tempName.className = "productName";
+				tempName.innerHTML = products[i].name;
+				productCard.appendChild(tempName);
+
+				// rating 
+				var tempRating = document.createElement("span");
+				tempRating.className = "productRating";
+				tempRating.innerHTML = "☆" + products[i].averageRating();
+				productCard.appendChild(tempRating);
+
+				//price
+				var tempPrice = document.createElement("div");
+				tempPrice.className = "productPrice";
+				tempPrice.innerHTML = convertPrice(products[i].price);
+				productCard.appendChild(tempPrice);
+
+				// description
+				var tempDescription = document.createElement("div");
+				tempDescription.className = "productDescription";
+				tempDescription.innerHTML = products[i].description;
+				productCard.appendChild(tempDescription);
+
+				//item details div
+				var tempDetails = document.createElement("div");
+				tempDetails.style.display = "none";
+				tempDetails.className = "productDetails";
+
+				tempDetails.innerHTML = "<strong>Item Details:</strong><br> · ID: " + products[i].id + "<br> · Name: " + products[i].name + "<br> · Category: " + products[i].category +
+					"<br> · Price: " + convertPrice(products[i].price) + "<br> · Quantity Available: " + products[i].qtyOnHand +
+					"<br> · Max Per Customer: " + products[i].maxQty + "<br> · Delivery Fee: " + convertPrice(products[i].shippingCost) +
+					"<br> · Description: " + products[i].description + "<br><br><strong>Customer Reviews</strong>:<br>" + products[i].displayReviews();
+
+				// make a closing button for item details div
+				var closeBtn = document.createElement("span");
+				closeBtn.innerHTML = "<br>Hide Details<br>";
+				closeBtn.value = "<br>Hide Details<br>";
+				closeBtn.className = "close"
+				tempDetails.appendChild(closeBtn);
+				productCard.appendChild(tempDetails);
+				closeBtn.onclick = function () {
+					this.parentElement.style.display = 'none';
+				}
+
+
+				// show details button
+				var tempShowDetailsBtn = document.createElement("input");
+				tempShowDetailsBtn.className = "productDetailsBtn";
+				tempShowDetailsBtn.type = "button"
+				tempShowDetailsBtn.value = "Show Details";
+				tempShowDetailsBtn.onclick = function showDetails() {
+					this.previousElementSibling.style.display = "block";
+				};
+				productCard.appendChild(tempShowDetailsBtn);
+
+
+				// quantity to add(user input)
+				var tempQty = document.createElement("input");
+				tempQty.type = "number";
+				tempQty.className = "qtyInp"
+				tempQty.defaultValue = 1
+				tempQty.min = 1;
+				tempQty.max = 10;
+				productCard.appendChild(tempQty);
+
+				//quantity validation
+				var tempQtyOnHand = document.createElement("div")
+				tempQtyOnHand.style.display = "none";
+				tempQtyOnHand.value = products[i].qtyOnHand;
+				productCard.appendChild(tempQtyOnHand);
+
+				tempQty.onblur = function () {
+					if (this.value > this.nextElementSibling.value) { // check qty on hand
+						window.alert("Not enough in stock!")
+						this.nextElementSibling.nextElementSibling.disabled = true;
+					} else {
+						this.nextElementSibling.nextElementSibling.disabled = false;
+					}
+
+					if (this.value > 10) {   // check max per customer
+						window.alert("Maximum 10 per customer!")
+						this.nextElementSibling.nextElementSibling.disabled = true;
+					} else if (this.value <= 0) {     // negative value not allowed
+						window.alert("Please input a valid number.")
+						this.nextElementSibling.nextElementSibling.disabled = true;
+					} else {
+						this.nextElementSibling.nextElementSibling.disabled = false;
+					}
+				};
+
+				//add to cart button
+				var tempAdd = document.createElement("button");
+				tempAdd.className = "productAdd";
+				tempAdd.innerText = "Add To Cart";
+				// update global variables nameToAdd(to find matched item from productList) & qtyToAdd(to get qty for cart item)
+				tempAdd.onclick = function passProductName() {
+					qtyToAdd = this.previousElementSibling.previousElementSibling.value;
+					qtyToAdd = parseInt(qtyToAdd);
+					nameToAdd = this.parentNode.children[1].innerHTML;
+					addToCart();
+				};
+				productCard.appendChild(tempAdd);
+
+				// append card to output div
+				productsOutput.appendChild(productCard);
+
+			}; //end for (loop the array to ouput)	
+
+		}; //end displayProducts()
+
+		/*
+			displayShoppingCart()
+			Purpose: display items form shoppingCart array
+			Trigger: on item added from card
+			Parameters: none
+			Returns: none
+		*/
+		// Step 1. output item list part of shoppingcart
+		function displayShoppingCart() {
+			var cartTable = document.getElementById("tbCartList")
+			cartTable.innerHTML = "";
+			var divCartOutput = document.getElementById("divCartOutput");
+
+
+			if (shoppingCart.length == 0) {
+				cartTable.innerHTML = "No Item in Cart";
+				divCartOutput.style.display = "none";
+
+			} else {
+				for (var i = 0; i < shoppingCart.length; i++) {
+
+					var cartRow = document.createElement("tr");
+
+					//id
+					var tdId = document.createElement("td");
+					tdId.innerHTML = shoppingCart[i].id;
+					cartRow.appendChild(tdId);
+
+					//name
+					var tdName = document.createElement("td");
+					tdName.innerHTML = shoppingCart[i].name;
+					cartRow.appendChild(tdName);
+
+					//price
+					var tdPrice = document.createElement("td");
+					tdPrice.innerHTML = convertPrice(shoppingCart[i].price);
+					cartRow.appendChild(tdPrice);
+
+					//quantity
+					var tdQty = document.createElement("td");
+					var iQty = document.createElement("input");
+					tdQty.className = "qtyCol";
+					//iQty.className = "qtyCol";
+					iQty.type = "number";
+					iQty.max = 10;
+					iQty.value = shoppingCart[i].qty;
+					tdQty.appendChild(iQty);
+					cartRow.appendChild(tdQty);
+
+
+					// onchange quantity in shopping cart ,re-assign nameToAdd & updatedQty, call upDateCart()
+					iQty.onchange = function () {
+
+						if (this.value > 10) {
+							window.alert("Maximun 10 per customer!")
+						} else if (this.value == "") {
+							updatedQty = 0;
+							updateCart();
+						} else if (this.value < 0) {
+							window.alert("Please input a valid number")
+						} else {
+							nameToAdd = this.parentNode.previousElementSibling.previousElementSibling.innerHTML;
+							updatedQty = parseInt(this.value);
+							updateCart();
+						}
+					}
+
+					//subtotal
+					var tdSubtotal = document.createElement("td");
+					tdSubtotal.innerHTML = convertPrice(shoppingCart[i].getItemSubtotal());
+					cartRow.appendChild(tdSubtotal);
+
+					// append rows to table
+					cartTable.appendChild(cartRow);
+
+				}; //end for
+
+				// Step 2. output subtotal part of shoppingcart
+				divCartOutput.style.display = "block";
+
+				//Item Subtotal
+				var tdItemSub = document.getElementById("tdItemSub");
+				var cartItemSubtotal = 0;
+				for (var item = 0; item < shoppingCart.length; item++) {
+					cartItemSubtotal += shoppingCart[item].getItemSubtotal();
+				}
+				tdItemSub.innerHTML = convertPrice(cartItemSubtotal);
+
+				//Estimated Shipping
+				var tdShipping = document.getElementById("tdShipping");
+				var cartShippingCost = 0;
+				for (var item = 0; item < shoppingCart.length; item++) {
+					cartShippingCost += shoppingCart[item].getShippingSubtotal();
+				}
+				tdShipping.innerHTML = convertPrice(cartShippingCost);
+
+				//Subtotal 
+				var tdSub = document.getElementById("tdSub");
+				var subtotalCost = cartItemSubtotal + cartShippingCost;
+				tdSub.innerHTML = convertPrice(subtotalCost);
+
+				//Estimated Tax 
+				var tdTax = document.getElementById("tdTax");
+				var taxCost = subtotalCost * 0.13;
+				tdTax.innerHTML = convertPrice(taxCost);
+
+				//Estimated Total 
+				var tdTotal = document.getElementById("tdTotal");
+				tdTotal.innerHTML = convertPrice(subtotalCost + taxCost);
+			}
+
+		};//end displayShoppingCart()
+
+		/*
+			populateProductBox()
+			Purpose: create options for dropdown list
+			Trigger: on page loads
+			Parameters: none
+			Returns: none
+		*/
+		function populateProductBox() {
+			for (var i = 0; i < productList.length; i++) {
+				var tempOption = document.createElement("option");
+				tempOption.innerHTML = productList[i].name;
+				tempOption.value = productList[i].name;
+				document.getElementById("ddReviewItem").appendChild(tempOption);
+			}
+		};
+
+		//constructor for reviews of product
+		function Review(rating, text) {
+			this.rating = rating;
+			this.text = text;
+		};
+
+
+		/*
+			reviewProduct()
+			Purpose: gather user revier input and push a new object into the productList.reviews array
+			Trigger: on item added from card
+			Parameters: none
+			Returns: none
+		*/
+		function reviewProduct() {
+			//get user input of product,rating and review
+			var itemToReview = document.getElementById("ddReviewItem").value;
+			var itemRating = document.getElementById("numReviewRating").value;
+			itemRating = itemRating * 1;
+			var itemReviewText = document.getElementById("reviewText").value;
+			var newReview = new Review(itemRating * 1, itemReviewText);
+
+			//update productList.review
+			// 1.loop for the object of products
+			// 2.create new object of review
+			// 3.push new review to review array
+			for (var i = 0; i < productList.length; i++) {
+				if (productList[i].name == itemToReview) {
+					productList[i].reviews.push(newReview);
+				}; //end if
+			} //end for
+
+			window.alert("\nReview of [ " + itemToReview + " ] submitted!\n\n☆" + itemRating.toFixed(1) + ' -- "' + itemReviewText + '"' + "\n\nCheck it out in Item Details.")
+
+			//display productList again
+			displayProducts(productList);
+
+			//clear user input
+			document.getElementById("reviewText").value = "";
+			document.getElementById("ddReviewItem").getElementsByTagName("option")[0].selected = true;
+			document.getElementById("numReviewRating").value = "5.0";
+
+		};
+
+		/*
+			validateRating()
+			Purpose: validate user input rating numbers
+			Trigger: on blur the rating number input
+			Parameters: none
+			Returns: none
+		*/
+		function validateRating() {
+			var ratingInput = document.getElementById("numReviewRating");
+			var submitBtn = document.getElementById("submitBtn")
+			if (ratingInput.value > 5 || ratingInput.value < 0) {
+				window.alert("Wait!\nRate us from 1 - 5 to better improve our service.");
+				submitBtn.disabled = true;
+			} else {
+				submitBtn.disabled = false;
+			}
+		}
+
+		/* another way to prevent form to auto re-load the page(instead of removing <form> tag):
+
+		//reviewProduct()
+		function reviewProduct(e){
+			e.preventDefault();
+
+			//get user input of product,rating and review
+			var itemToReview = document.getElementById("ddReviewItem").value;
+			var itemRating = document.getElementById("numReviewRating").value;
+			var itemReviewText = document.getElementById("reviewText").value;
+			var newReview= new Review(itemRating,itemReviewText);
+
+			//update productList.review
+			// 1.loop for the object of products
+			// 2.create new object of review
+			// 3.push new review to review array
+			for(var i=0; i<productList.length;i++){
+				if (productList[i].name==itemToReview){
+					console.log(productList[i])
+					productList[i].reviews.push(newReview);
+					console.log(productList[i])
+				}; //end if
+			} //end for
+
+			//display productList again
+			displayProducts(productList);
+		};
+		document.querySelector('form').addEventListener('submit', reviewProduct)
+		*/
+
+
+
+
+	</script>
+
+</body>
+
+</html>
